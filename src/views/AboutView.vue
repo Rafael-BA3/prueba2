@@ -1,26 +1,26 @@
-<template>
+﻿<template>
   <div class="min-h-screen bg-zinc-950 text-white">
     <Navbar />
     <div class="mx-auto max-w-6xl px-6 py-16">
       <p class="text-sm uppercase tracking-[0.3em] text-cyan-300">Checklist del proyecto</p>
       <h1 class="mt-4 text-5xl font-bold">Requisitos cubiertos</h1>
       <p class="mt-4 max-w-3xl text-xl leading-relaxed text-zinc-400">
-        V-List ya funciona como una aplicacion sencilla de gestion de tareas y demuestra las
-        caracteristicas principales del framework de forma visible para tu entrega.
+        V-List funciona como una demo local de gestion de tareas con flujo personal y empresarial,
+        lista para presentar la idea completa antes de conectarla a una base de datos real.
       </p>
 
       <div class="mt-10 grid gap-4 lg:grid-cols-2">
         <article class="rounded-3xl border border-zinc-800 bg-zinc-900 p-6">
           <h2 class="text-2xl font-semibold">Aplicacion sencilla</h2>
           <p class="mt-3 text-zinc-400">
-            Es un gestor de tareas con alta, edicion, marcado de completadas y eliminacion.
+            Se pueden crear, editar, marcar y eliminar tareas dentro de un flujo demostrativo funcional.
           </p>
         </article>
 
         <article class="rounded-3xl border border-zinc-800 bg-zinc-900 p-6">
           <h2 class="text-2xl font-semibold">Componentes</h2>
           <p class="mt-3 text-zinc-400">
-            Se usan componentes separados como Navbar, TaskForm y TaskItem.
+            Se usan componentes separados como Navbar, TaskForm y TaskItem para mantener el proyecto ordenado.
           </p>
         </article>
 
@@ -32,23 +32,23 @@
         </article>
 
         <article class="rounded-3xl border border-zinc-800 bg-zinc-900 p-6">
-          <h2 class="text-2xl font-semibold">Estado global</h2>
+          <h2 class="text-2xl font-semibold">Estado local</h2>
           <p class="mt-3 text-zinc-400">
-            Pinia maneja la sesion del usuario y las tareas persistidas para cada cuenta.
+            Pinia y localStorage manejan sesion, usuarios, empresas y tareas sin depender de backend.
           </p>
         </article>
 
         <article class="rounded-3xl border border-zinc-800 bg-zinc-900 p-6">
-          <h2 class="text-2xl font-semibold">Integracion con API</h2>
+          <h2 class="text-2xl font-semibold">Cuentas duales</h2>
           <p class="mt-3 text-zinc-400">
-            Se pueden importar tareas demo desde JSONPlaceholder para demostrar consumo de datos externos.
+            Existen cuentas personales y cuentas de empresa con roles de administrador y empleado.
           </p>
         </article>
 
         <article class="rounded-3xl border border-zinc-800 bg-zinc-900 p-6">
-          <h2 class="text-2xl font-semibold">Extra util</h2>
+          <h2 class="text-2xl font-semibold">Demo empresarial</h2>
           <p class="mt-3 text-zinc-400">
-            Las tareas con fecha pueden exportarse al calendario como archivo .ics, compatible con muchos dispositivos.
+            Los admins pueden crear empresas, ver miembros e importar tareas desde API; los empleados pueden exportarlas al calendario.
           </p>
         </article>
       </div>
