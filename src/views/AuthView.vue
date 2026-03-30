@@ -37,7 +37,7 @@
         </div>
       </section>
 
-      <section class="rounded-[2rem] border border-zinc-800 bg-zinc-900 p-6 shadow-2xl shadow-black/30">
+      <section class="rounded-4xl border border-zinc-800 bg-zinc-900 p-6 shadow-2xl shadow-black/30">
         <div class="mb-6 flex gap-3">
           <button
             type="button"

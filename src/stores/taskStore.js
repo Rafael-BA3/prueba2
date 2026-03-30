@@ -287,51 +287,32 @@ export const useTaskStore = defineStore('tasks', {
 
       return { ok: false, message: 'No puedes editar esta lista.' }
     },
-    async importTasksFromApi() {
-      const authStore = useAuthStore()
-      const activeUser = authStore.currentUser
+async importTasksFromApi() {
+  const authStore = useAuthStore()
+  const activeUser = authStore.currentUser
 
-      if (!isCompanyAdmin(activeUser)) {
-        this.error = 'Solo el administrador puede alimentar la API interna desde una API externa.'
-        return { ok: false, message: this.error }
-      }
+  if (!isCompanyAdmin(activeUser)) {
+    this.error = 'Solo el administrador puede alimentar la API interna.'
+    return { ok: false, message: this.error }
+  }
 
-      this.loading = true
-      this.error = ''
+  this.loading = true
+  this.error = ''
 
-      try {
-        const response = await fetch('https://jsonplaceholder.typicode.com/todos?_limit=5')
-        const data = await response.json()
-        const knownTitles = new Set(this.companyApiTasks.map((task) => task.title.toLowerCase()))
-        const importedTasks = data
-          .filter((task) => !knownTitles.has(task.title.toLowerCase()))
-          .map((task) =>
-            createTaskRecord({
-              title: task.title.charAt(0).toUpperCase() + task.title.slice(1),
-              dueAt: '',
-              source: 'api',
-              user: activeUser
-            })
-          )
-
-        this.companyApiTasks = [...this.companyApiTasks, ...importedTasks]
-        this.persistCompanyApiTasks()
-
-        return {
-          ok: true,
-          count: importedTasks.length,
-          message: importedTasks.length
-            ? `Se publicaron ${importedTasks.length} tareas nuevas en la API interna.`
-            : 'No habia tareas nuevas para publicar en la API interna.'
-        }
-      } catch (error) {
-        console.error('Error importing tasks', error)
-        this.error = 'No se pudo conectar con la API externa de ejemplo.'
-        return { ok: false, message: this.error }
-      } finally {
-        this.loading = false
-      }
-    },
+  try {
+    return {
+      ok: true,
+      count: 0,
+      message: 'La API interna ya esta lista para que publiques tareas manualmente.'
+    }
+  } catch (error) {
+    console.error('Error importing tasks', error)
+    this.error = 'No se pudo preparar la API interna.'
+    return { ok: false, message: this.error }
+  } finally {
+    this.loading = false
+  }
+},
     importTasksFromCompanyApi() {
       const authStore = useAuthStore()
       const activeUser = authStore.currentUser

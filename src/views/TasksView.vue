@@ -95,35 +95,6 @@
         </div>
       </section>
 
-      <section v-if="canImportExternalApi" class="rounded-3xl border border-zinc-800 bg-zinc-900 p-6">
-        <div class="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
-          <div>
-            <p class="text-sm uppercase tracking-[0.3em] text-cyan-300">API externa</p>
-            <h2 class="mt-2 text-2xl font-semibold">Alimentar la API interna de tu empresa</h2>
-            <p class="mt-2 text-zinc-400">
-              Trae tareas de ejemplo desde JSONPlaceholder y publicalas en tu API interna demo para que luego tus empleados las importen.
-            </p>
-          </div>
-
-          <button
-            type="button"
-            class="rounded-2xl bg-cyan-500 px-6 py-4 font-semibold text-zinc-950 transition hover:bg-cyan-400 disabled:cursor-not-allowed disabled:bg-zinc-700 disabled:text-zinc-300"
-            :disabled="store.loading"
-            @click="importExternalApiTasks"
-          >
-            {{ store.loading ? 'Importando...' : 'Cargar en API interna' }}
-          </button>
-        </div>
-
-        <p v-if="feedback" class="mt-4 text-sm text-zinc-300">
-          {{ feedback }}
-        </p>
-
-        <p v-if="store.error" class="mt-3 text-sm text-rose-300">
-          {{ store.error }}
-        </p>
-      </section>
-
       <section v-if="canImportCompanyApi" class="rounded-3xl border border-zinc-800 bg-zinc-900 p-6">
         <div class="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
           <div>
@@ -288,7 +259,6 @@ const isCompanyAccount = computed(() => authStore.isCompanyAccount)
 const isCompanyAdmin = computed(() => authStore.isCompanyAdmin)
 const isCompanyEmployee = computed(() => authStore.isCompanyEmployee)
 const showTaskForm = computed(() => !isCompanyEmployee.value)
-const canImportExternalApi = computed(() => isCompanyAdmin.value)
 const canImportCompanyApi = computed(() => isCompanyEmployee.value)
 const canManageCurrentList = computed(() => Boolean(authStore.currentUser))
 const canExportCurrentList = computed(() => isCompanyEmployee.value)
@@ -324,11 +294,6 @@ const saveEdit = () => {
 const closeModal = () => {
   editingTask.value = null
   feedback.value = ''
-}
-
-const importExternalApiTasks = async () => {
-  const result = await store.importTasksFromApi()
-  feedback.value = result.message ?? ''
 }
 
 const importCompanyTasks = () => {
@@ -425,7 +390,7 @@ const emptyStateMessage = computed(() => {
   }
 
   if (isCompanyAdmin.value) {
-    return 'Publica tareas manualmente o cargalas desde la API externa para poblar la API interna de la empresa.'
+  return 'Publica tareas manualmente para poblar la API interna de la empresa.'
   }
 
   return 'Usa el boton de importacion para traer a tu lista las tareas que publique tu administrador en la API interna.'
